@@ -1,0 +1,47 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: lightgreen;
+  font-family: "ƒqƒ‰ƒMƒmŠpƒS Pro W3", "Hiragino Kaku Gothic Pro", Meiryo, "ƒƒCƒŠƒI", Verdana, Arial, Helvetica, "‚l‚r ‚oƒSƒVƒbƒN", sans-serif;
+  font-size: small;
+}
+body.body0 {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: lightgreen;
+  font-family: "ƒqƒ‰ƒMƒmŠpƒS Pro W3", "Hiragino Kaku Gothic Pro", Meiryo, "ƒƒCƒŠƒI", Verdana, Arial, Helvetica, "‚l‚r ‚oƒSƒVƒbƒN", sans-serif;
+  font-size: small;
+}
+body.body1 {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: khaki;
+  font-family: "ƒqƒ‰ƒMƒmŠpƒS Pro W3", "Hiragino Kaku Gothic Pro", Meiryo, "ƒƒCƒŠƒI", Verdana, Arial, Helvetica, "‚l‚r ‚oƒSƒVƒbƒN", sans-serif;
+  font-size: small;
+}
+
+a {
+  color: #00B7FF;
+}
+h1 {
+  color: #008000;
+  font-size: large;
+  font-family: "‚l‚r ‚oƒSƒVƒbƒN",fantasy;
+  font-style: italic;
+}
+h2 {
+	font-size: medium;
+}
+h3 {
+  font-size: medium;
+}
+div.kanso {
+  overflow: scroll;   /* ƒXƒNƒ[ƒ‹•\¦ */
+  width: 500px;
+  height: 100px;
+  white-space: pre;	/*‹Lq‚µ‚½’Ê‚è‚ÌŒ`‚Å•\¦*/
+  background-color: white;  
+}
+canvas {
+	border:1px solid #4c4c4c;
+}

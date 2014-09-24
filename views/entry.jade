@@ -1,0 +1,99 @@
+extends layout_admin
+
+block content
+  script.
+    var socket = io.connect('http://localhost:3000');
+    // メッセージを受けたとき
+    socket.on('entry redisplay', function(msg) {
+      alert('redisplay!');
+      window.location.reload();     
+    });
+    window.onload = function() {
+      var mode = document.getElementById('mode');
+      //window.alert("Send!(1)"+mode.value);
+      if(mode.value==1){
+        var msg='entry'; //dummy
+        socket.emit('entry add', { message: msg });        
+      }
+      mode=0;
+      //window.alert("Send!(2)"+mode.value);
+    }
+    // 未入力チェック
+    function check() {
+      var val1 = document.getElementById('shain_no').value;
+      var val2 = document.getElementById('shain_name').value;
+      var val3 = document.getElementById('thema').value;
+      if (val1.length>0 && val2.length>0 && val3.length>0) {
+        return true;
+      } else {
+        window.alert('空欄があります。入力してください。')
+        return false;
+      }
+    }
+    // メッセージを送る
+    function SendMsg() {
+      //alert('redisplay!?');
+      var msg='entry';
+      socket.emit('entry add', { message: msg });
+      //alert('send!');
+    }
+
+  h1= title
+  h3 Welcome to #{title}
+  p= msg
+
+  form(method='post',action='/entry_add')
+    table(border='0')
+      tr
+        th 発表年
+        td
+          select(name='year')
+            option(value='2013') 2013
+            option(value='2014' selected) 2014
+            option(value='2015') 2015
+      th 発表月
+        td
+          select(name='month')
+            option(value='01') 01
+            option(value='02') 02
+            option(value='03') 03
+            option(value='04') 04
+            option(value='05') 05
+            option(value='06') 06
+            option(value='07') 07
+            option(value='08') 08
+            option(value='09') 09
+            option(value='10') 10
+            option(value='11') 11
+            option(value='12') 12
+      tr
+        th 社員No
+        td
+          input(type='text', id='shain_no', name='shain_no', size=6, value='')
+      tr
+        th 名前
+        td
+          input(type='text', id='shain_name', name='shain_name', value='')
+      tr
+        th テーマ
+        td
+          input(type='text', id='thema', name='thema', size=30, value=thema)
+    input(type='submit', value='登録', onclick="return check();")
+
+  table(border='1')
+    tr
+      th 発表年月
+      th 社員No
+      th 名前
+      th テーマ
+    - each data in datas
+      tr
+        td= data.year+"-"+data.month
+        td= data.shainNo
+        td= data.presenter
+        td= data.thema
+        td
+          a(class='button', href='/entry_del/'+data.year+'/'+data.month+'/'+data.shainNo ) 削除
+  p
+    a(href="/") トップページへ
+  input(type='hidden', id='mode',  name='mode', value= mode)

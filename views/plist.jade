@@ -1,0 +1,28 @@
+extends layout_admin
+
+block content
+  h1= title
+  h3 Welcome to #{title}
+  p= msg
+
+   table(border='1')
+    tr
+      th 発表年月
+      th 社員No
+      th 名前
+      th テーマ
+    - each data in datas
+      tr
+        td= data.year+'_'+data.month
+        td
+          if mode == 1 
+            a(href='/summary/#{data.year}/#{data.month}/#{data.shainNo}')= data.shainNo
+          else
+            a(href='/qsheet/#{data.year}/#{data.month}/#{data.shainNo}')= data.shainNo
+        td= data.presenter
+        td= data.thema
+        
+  p
+    a(href="/") トップページへ
+    
+  

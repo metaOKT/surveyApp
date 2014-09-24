@@ -1,0 +1,130 @@
+extends layout
+
+block content
+  h1= title
+  h3 Welcome to #{title}
+  p= msg
+
+  table(border='0')
+    tr
+      th(colspan='3', align='left') 部会発表用アンケートシート
+    tr
+      td #{data.presenter} さんの発表
+      td (#{year} 年
+      td #{month} 月)
+    tr
+      td(colspan='3', align='left') [テーマ] #{data.thema}
+
+  form(action='/go',method='post')
+    table(border='0')
+      tr(bgcolor='limegreen')
+        th(colspan='2', align='left')= '(1)内容について'
+      tr
+        td= '①テーマ・表題に沿った内容であったか？'
+        td
+          input(type='radio', name='q_1_1', value='1')
+          | YES
+          input(type='radio', name='q_1_1', value='2', checked)
+          | NEITHER
+          input(type='radio', name='q_1_1', value='3')
+          | NO
+      tr
+        td= '②話の構成は適切だったと思うか？'
+        td
+          input(type='radio', name='q_1_2', value='1')
+          | YES
+          input(type='radio', name='q_1_2', value='2', checked)
+          | NEITHER
+          input(type='radio', name='q_1_2', value='3')
+          | NO
+      tr
+        td= '③話の内容を理解できたか？'
+        td
+          input(type='radio', name='q_1_3', value='1')
+          | YES
+          input(type='radio', name='q_1_3', value='2', checked)
+          | NEITHER
+          input(type='radio', name='q_1_3', value='3')
+          | NO
+      tr(bgcolor='limegreen')
+        th(colspan='2', align='left')= '(2)プレゼン用ツール・資料について'
+      tr
+        td= '①スライドの視認性に問題はなかったか？(文字大きさ・色等)'
+        td
+          input(type='radio', name='q_2_1', value='1')
+          | YES
+          input(type='radio', name='q_2_1', value='2', checked)
+          | NEITHER
+          input(type='radio', name='q_2_1', value='3')
+          | NO
+      tr
+        td= '②理解を助けるためのグラフィカルな工夫がされていたか？(図表やグラフ等)'
+        td
+          input(type='radio', name='q_2_2', value='1')
+          | YES
+          input(type='radio', name='q_2_2', value='2', checked)
+          | NEITHER
+          input(type='radio', name='q_2_2', value='3')
+          | NO
+      tr
+        td= '③ツールの使用方法やネットへの接続等で手間取ることはなかったか？'
+        td
+          input(type='radio', name='q_2_3', value='1')
+          | YES
+          input(type='radio', name='q_2_3', value='2', checked)
+          | NEITHER
+          input(type='radio', name='q_2_3', value='3')
+          | NO
+      tr(bgcolor='limegreen')
+        th(colspan='2', align='left')= '(3)話し方について'
+      tr
+        td= '①発表者の声の大きさは適当であったと思うか？'
+        td
+          input(type='radio', name='q_3_1', value='1')
+          | YES
+          input(type='radio', name='q_3_1', value='2', checked)
+          | NEITHER
+          input(type='radio', name='q_3_1', value='3')
+          | NO
+      tr
+        td= '②明瞭でメリハリ(スピードや間の取り方等)のある話し方であったと思うか？'
+        td
+          input(type='radio', name='q_3_2', value='1')
+          | YES
+          input(type='radio', name='q_3_2', value='2', checked)
+          | NEITHER
+          input(type='radio', name='q_3_2', value='3')
+          | NO
+
+      tr(bgcolor='limegreen')
+        th(colspan='2', align='left')= '(4)姿勢・動作について'
+      tr
+        td= '①発表者の聴衆に対する姿勢は適切であったと思うか？(視線・姿勢等)'
+        td
+          input(type='radio', name='q_4_1', value='1')
+          | YES
+          input(type='radio', name='q_4_1', value='2', checked)
+          | NEITHER
+          input(type='radio', name='q_4_1', value='3')
+          | NO
+      tr
+        td= '②必要に応じてポインタ等での補足ができていたか？'
+        td
+          input(type='radio', name='q_4_2', value='1')
+          | YES
+          input(type='radio', name='q_4_2', value='2', checked)
+          | NEITHER
+          input(type='radio', name='q_4_2', value='3')
+          | NO
+    br
+    p 自由記入欄
+    textarea(id='kanso', name='kanso', cols='80', rows='10', maxlength='800')
+      - kanso
+    br          
+    input(type='submit', value='確認')
+    input(type='hidden', name='year', value=data.year)
+    input(type='hidden', name='month', value=data.month)
+    input(type='hidden', name='shainNo', value=data.shainNo)
+ 
+  p
+    a(href="/") トップページへ

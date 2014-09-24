@@ -1,0 +1,115 @@
+extends layout_admin
+
+block content
+  script.
+    window.onload = function() {
+      var g = new html5jp.graph.vbar("graph");
+      if( ! g ) { return; }
+      var items = [
+        ["YES",    #{itemsY}],
+        ["NEITHER",#{itemsE}],
+        ["NO",     #{itemsN}] ];
+      var params = {
+        x: ["質問", "[1]-(1)","[1]-(2)","[1]-(3)", "[2]-(1)","[2]-(2)","[2]-(3)", "[3]-(1)", "[3]-(2)", "[4]-(1)", "[4]-(2)"],
+        y: ["集計票数", 0, 20, 40, 60, 80, 100],
+        barShape: "line",
+        barColors: ["green", "olive", "red"],
+        dLabel: false
+      };
+      g.draw(items, params);
+    };
+
+    var socket = io.connect('http://localhost:3000');
+    socket.on('summary redisplay', function (data) {
+      //alert('redisplay!');
+      window.location.reload(true);     
+    });
+
+  h1= title
+  h3 Welcome to #{title}
+  p= msg
+
+  table(border='0')
+    tr
+      th(colspan='3', align='left') 部会発表アンケート結果
+    tr
+      td #{data.presenter} さんの発表
+      td (#{year} 年
+      td #{month} 月)
+    tr
+      td(colspan='3', align='left') [テーマ] #{data.thema}
+
+  form(action='/go',method='post')
+    table(border='0')
+      tr(bgcolor='darkorange')
+        th(align='left')= 'No.  説問'
+        th(align='center')= 'YES'
+        th(align='center')= 'NEITHER'
+        th(align='center')= 'NO'
+      tr(bgcolor='limegreen')
+        th(colspan='4', align='left')= '(1)内容について'
+      tr
+        td= '①テーマ・表題に沿った内容であったか？'
+        td(align='center') #{data.q_1_1_y}
+        td(align='center') #{data.q_1_1_e}
+        td(align='center') #{data.q_1_1_n}
+      tr
+        td= '②話の構成は適切だったと思うか？'
+        td(align='center') #{data.q_1_2_y}
+        td(align='center') #{data.q_1_2_e}
+        td(align='center') #{data.q_1_2_n}
+      tr
+        td= '③話の内容を理解できたか？'
+        td(align='center') #{data.q_1_3_y}
+        td(align='center') #{data.q_1_3_e}
+        td(align='center') #{data.q_1_3_n}
+      tr(bgcolor='limegreen')
+        th(colspan='4', align='left')= '(2)プレゼン用ツール・資料について'
+      tr
+        td= '①スライドの視認性に問題はなかったか？(文字大きさ・色等)'
+        td(align='center') #{data.q_2_1_y}
+        td(align='center') #{data.q_2_1_e}
+        td(align='center') #{data.q_2_1_n}
+      tr
+        td= '②理解を助けるためのグラフィカルな工夫がされていたか？(図表やグラフ等)'
+        td(align='center') #{data.q_2_2_y}
+        td(align='center') #{data.q_2_2_e}
+        td(align='center') #{data.q_2_2_n}
+      tr
+        td= '③ツールの使用方法やネットへの接続等で手間取ることはなかったか？'
+        td(align='center') #{data.q_2_3_y}
+        td(align='center') #{data.q_2_3_e}
+        td(align='center') #{data.q_2_3_n}
+      tr(bgcolor='limegreen')
+        th(colspan='4', align='left')= '(3)話し方について'
+      tr
+        td= '①発表者の声の大きさは適当であったと思うか？'
+        td(align='center') #{data.q_3_1_y}
+        td(align='center') #{data.q_3_1_e}
+        td(align='center') #{data.q_3_1_n}
+      tr
+        td= '②明瞭でメリハリ(スピードや間の取り方等)のある話し方であったと思うか？'
+        td(align='center') #{data.q_3_2_y}
+        td(align='center') #{data.q_3_2_e}
+        td(align='center') #{data.q_3_2_n}
+      tr(bgcolor='limegreen')
+        th(colspan='4', align='left')= '(4)姿勢・動作について'
+      tr
+        td= '①発表者の聴衆に対する姿勢は適切であったと思うか？(視線・姿勢等)'
+        td(align='center') #{data.q_4_1_y}
+        td(align='center') #{data.q_4_1_e}
+        td(align='center') #{data.q_4_1_n}
+      tr
+        td= '②必要に応じてポインタ等での補足ができていたか？'
+        td(align='center') #{data.q_4_2_y}
+        td(align='center') #{data.q_4_2_e}
+        td(align='center') #{data.q_4_2_n}
+
+    p 自由記入欄 
+    div.kanso #{data.kanso}
+  br
+  div
+    canvas#graph(width="500", height="200")
+  
+  p
+    a(href="/") トップページへ

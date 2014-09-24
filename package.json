@@ -1,0 +1,15 @@
+{
+  "name": "surveyApp",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "main": "app.js",
+  "dependencies": {
+    "express": "3.2.6",
+    "jade": "*",
+    "mongoose": "3.x",
+    "socket.io": "0.9.x"
+  }
+}

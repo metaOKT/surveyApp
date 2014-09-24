@@ -1,0 +1,7 @@
+{
+  "version": "v0.0.1",
+  "npm": true,
+  "main": "app.js",
+  "args": [],
+  "envs": {}
+}
