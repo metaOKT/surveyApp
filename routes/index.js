@@ -57,7 +57,7 @@ var MySummaryData = mongoose.model('mysummary', mysummarySchema);
 var kansoMaxLen	=1024*20;	//20KB(1人200字×100人めど)
 
 //provide a sensible default for local development
-var db_name = 'surveyapp';
+var db_name = 'metasurvey';
 var mongodb_connection_string = 'mongodb://127.0.0.1:27017/' + db_name;
 //take advantage of openshift env vars when available:
 if(process.env.OPENSHIFT_MONGODB_DB_URL){
